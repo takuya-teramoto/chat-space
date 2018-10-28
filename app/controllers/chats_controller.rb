@@ -1,6 +1,7 @@
 class ChatsController < ApplicationController
   before_action :set_chat, only: [:show, :edit, :update, :destroy]
-
+  before_action :move_to_index, except: [:index, :show]
+  before_action :confirm_current_user, only: [:edit, :update, :destroy]
   # GET /chats
   # GET /chats.json
   def index
@@ -63,12 +64,15 @@ class ChatsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_chat
-      @chat = Chat.find(params[:id])
+    def chat_params
+      params.require(:chat).permit(:text).marge(user_id: current_user.id, chat_group_id: params[:chat_group_id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def chat_params
-      params.fetch(:chat, {})
+    def move_to_index
+      redirect_to action: :index unless user_signed_in?
+    end
+
+    def confirm_current_user
+      redirect_to action: :index unless current_user.id == @chat.user.id
     end
 end
