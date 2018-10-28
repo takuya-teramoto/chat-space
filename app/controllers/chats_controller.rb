@@ -1,26 +1,26 @@
 class ChatsController < ApplicationController
-  before_action :set_chat, only: [:show, :edit, :update, :destroy]
+  # before_action :set_chat, only: [:show, :edit, :update, :destroy]
   before_action :move_to_index, except: [:index, :show]
-  before_action :confirm_current_user, only: [:edit, :update, :destroy]
+  # before_action :confirm_current_user, only: [:edit, :update, :destroy]
   # GET /chats
   # GET /chats.json
   def index
-    @chats = Chat.all
+    @chats = Chat_group.find(params[:chat_group_id]).chats
   end
 
   # GET /chats/1
   # GET /chats/1.json
-  def show
-  end
+  # def show
+  # end
 
   # GET /chats/new
-  def new
-    @chat = Chat.new
-  end
+  # def new
+  #   @chat = Chat.new
+  # end
 
   # GET /chats/1/edit
-  def edit
-  end
+  # def edit
+  # end
 
   # POST /chats
   # POST /chats.json
@@ -40,27 +40,27 @@ class ChatsController < ApplicationController
 
   # PATCH/PUT /chats/1
   # PATCH/PUT /chats/1.json
-  def update
-    respond_to do |format|
-      if @chat.update(chat_params)
-        format.html { redirect_to @chat, notice: 'Chat was successfully updated.' }
-        format.json { render :show, status: :ok, location: @chat }
-      else
-        format.html { render :edit }
-        format.json { render json: @chat.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  # def update
+  #   respond_to do |format|
+  #     if @chat.update(chat_params)
+  #       format.html { redirect_to @chat, notice: 'Chat was successfully updated.' }
+  #       format.json { render :show, status: :ok, location: @chat }
+  #     else
+  #       format.html { render :edit }
+  #       format.json { render json: @chat.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
   # DELETE /chats/1
   # DELETE /chats/1.json
-  def destroy
-    @chat.destroy
-    respond_to do |format|
-      format.html { redirect_to chats_url, notice: 'Chat was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
+  # def destroy
+  #   @chat.destroy
+  #   respond_to do |format|
+  #     format.html { redirect_to chats_url, notice: 'Chat was successfully destroyed.' }
+  #     format.json { head :no_content }
+  #   end
+  # end
 
   private
     # Use callbacks to share common setup or constraints between actions.
@@ -72,7 +72,7 @@ class ChatsController < ApplicationController
       redirect_to action: :index unless user_signed_in?
     end
 
-    def confirm_current_user
-      redirect_to action: :index unless current_user.id == @chat.user.id
-    end
+    # def confirm_current_user
+    #   redirect_to action: :index unless current_user.id == @chat.user.id
+    # end
 end
