@@ -5,7 +5,9 @@ class ChatsController < ApplicationController
   # GET /chats
   # GET /chats.json
   def index
-    @chats = Chat_group.find(params[:chat_group_id]).chats
+    if params[:chat_group_id] #rootは除外する
+      @chats = ChatGroup.find(params[:chat_group_id]).chats
+    end
   end
 
   # GET /chats/1
