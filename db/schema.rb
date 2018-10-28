@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_28_052405) do
+ActiveRecord::Schema.define(version: 2018_10_28_052933) do
 
   create_table "chat_groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", default: "", null: false
@@ -28,6 +28,15 @@ ActiveRecord::Schema.define(version: 2018_10_28_052405) do
     t.index ["user_id"], name: "index_chats_on_user_id"
   end
 
+  create_table "user_chat_groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "chat_group_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chat_group_id"], name: "index_user_chat_groups_on_chat_group_id"
+    t.index ["user_id"], name: "index_user_chat_groups_on_user_id"
+  end
+
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -43,4 +52,6 @@ ActiveRecord::Schema.define(version: 2018_10_28_052405) do
 
   add_foreign_key "chats", "chat_groups"
   add_foreign_key "chats", "users"
+  add_foreign_key "user_chat_groups", "chat_groups"
+  add_foreign_key "user_chat_groups", "users"
 end
