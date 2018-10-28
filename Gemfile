@@ -68,3 +68,6 @@ gem 'compass-rails', github: 'Compass/compass-rails'
 gem 'sprockets'
 gem 'kaminari'
 gem 'font-awesome-rails'
+
+gem 'haml-rails'
+gem 'erb2haml'
