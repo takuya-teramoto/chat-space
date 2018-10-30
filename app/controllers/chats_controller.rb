@@ -8,6 +8,7 @@ class ChatsController < ApplicationController
     if params[:chat_group_id] #rootは除外する
       @chats = ChatGroup.find(params[:chat_group_id]).chats
     end
+    @chat_groups = ChatGroup.all
   end
 
   # GET /chats/1
