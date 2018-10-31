@@ -10,19 +10,132 @@
     = render "groups"
     = render "groups"
 
-  .group-edit
-    .group-edit__edit-botton
-      edit-botton
-    .group-edit__selected-group-name
-      selectedgroupname
-    .group-edit__members
-      Menbers: test test test
+  - unless current_page?(root_path)
+    .group-edit
+      .group-edit__edit-button
+        edit-button
+      .group-edit__selected-group-name
+        selectedgroupname
+      .group-edit__members
+        Menbers: test test test
 
+- unless current_page?(root_path)
+  .chat-space
+    .chat-space__top-margin
+    .chat-space__chat
+      .chat-space__chat__username
+        username
+      .chat-space__chat__dateandtime
+        dateandtime
+      .chat-space__chat__message
+        message
+    .chat-space__chat
+      .chat-space__chat__username
+        username
+      .chat-space__chat__dateandtime
+        dateandtime
+      .chat-space__chat__message
+        message
+    .chat-space__chat
+      .chat-space__chat__username
+        username
+      .chat-space__chat__dateandtime
+        dateandtime
+      .chat-space__chat__message
+        message
+    .chat-space__chat
+      .chat-space__chat__username
+        username
+      .chat-space__chat__dateandtime
+        dateandtime
+      .chat-space__chat__message
+        message
+    .chat-space__chat
+      .chat-space__chat__username
+        username
+      .chat-space__chat__dateandtime
+        dateandtime
+      .chat-space__chat__message
+        message
+    .chat-space__chat
+      .chat-space__chat__username
+        username
+      .chat-space__chat__dateandtime
+        dateandtime
+      .chat-space__chat__message
+        message
+    .chat-space__chat
+      .chat-space__chat__username
+        username
+      .chat-space__chat__dateandtime
+        dateandtime
+      .chat-space__chat__message
+        message
+    .chat-space__chat
+      .chat-space__chat__username
+        username
+      .chat-space__chat__dateandtime
+        dateandtime
+      .chat-space__chat__message
+        message
+    .chat-space__chat
+      .chat-space__chat__username
+        username
+      .chat-space__chat__dateandtime
+        dateandtime
+      .chat-space__chat__message
+        message
+    .chat-space__chat
+      .chat-space__chat__username
+        username
+      .chat-space__chat__dateandtime
+        dateandtime
+      .chat-space__chat__message
+        message
+    .chat-space__chat
+      .chat-space__chat__username
+        username
+      .chat-space__chat__dateandtime
+        dateandtime
+      .chat-space__chat__message
+        message
+    .chat-space__chat
+      .chat-space__chat__username
+        username
+      .chat-space__chat__dateandtime
+        dateandtime
+      .chat-space__chat__message
+        message
+    .chat-space__chat
+      .chat-space__chat__username
+        username
+      .chat-space__chat__dateandtime
+        dateandtime
+      .chat-space__chat__message
+        message
+    .chat-space__chat
+      .chat-space__chat__username
+        username
+      .chat-space__chat__dateandtime
+        dateandtime
+      .chat-space__chat__message
+        message
+    .chat-space__chat
+      .chat-space__chat__username
+        username
+      .chat-space__chat__dateandtime
+        dateandtime
+      .chat-space__chat__message
+        message
+    .chat-space__bottom-margin
 
-
-
-
-
+- unless current_page?(root_path)
+  %foot
+    .bottom-text-area
+      = form_for [@chat_group, @chat] do |f|
+        = f.text_area :text, placeholder: " type a message", autofocus: true, required: true
+        .bottom-text-area__send-button
+          = f.submit "Send", id: "button", class: "send-button"
 / %p#notice= notice
 / %h1 Chats
 / %table
