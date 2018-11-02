@@ -1,6 +1,6 @@
 .side-menu__group
   .side-menu__group__group-name
-    groupname
+    = link_to "#{group.name}", chat_group_chats_path(group)
   .side-menu__group__newest-comment
     newest-comment
 

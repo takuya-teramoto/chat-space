@@ -2,22 +2,22 @@
   .side-menu
     .side-menu__username-area
       .side-menu__username-area__username
-        username
+        = current_user.name
       .side-menu__username-area__fontawesome
-        fontawesome
-
-    = render "groups"
-    = render "groups"
-    = render "groups"
+        = fa_icon("edit")
+        = fa_icon("cog")
+    - @chat_groups.each do |group|
+      = render "groups", group: group
 
   - unless current_page?(root_path)
     .group-edit
       .group-edit__edit-button
-        edit-button
+        = link_to "edit", edit_chat_group_path(@chat_group)
       .group-edit__selected-group-name
-        selectedgroupname
+        = @chat_group.name
       .group-edit__members
-        Menbers: test test test
+        - @chat_group.users.each do |user|
+          = user.name
 
 - unless current_page?(root_path)
   .chat-space
