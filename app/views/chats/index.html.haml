@@ -1,4 +1,4 @@
-%head
+%header
   .side-menu
     .side-menu__username-area
       .side-menu__username-area__username
@@ -130,7 +130,7 @@
     .chat-space__bottom-margin
 
 - unless current_page?(root_path)
-  %foot
+  %footer
     .bottom-text-area
       = form_for [@chat_group, @chat] do |f|
         = f.text_area :text, placeholder: " type a message", autofocus: true, required: true
