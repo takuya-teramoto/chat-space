@@ -8,7 +8,7 @@ class ChatsController < ApplicationController
     if params[:chat_group_id] #rootは除外する
       @chat = Chat.new
       @chat_group = ChatGroup.find(params[:chat_group_id])
-      @chats = @chat_group.chats
+      @chats = @chat_group.chats.order(id: "DESC")
     end
     @chat_groups = ChatGroup.all
   end
@@ -34,7 +34,7 @@ class ChatsController < ApplicationController
 
     respond_to do |format|
       if @chat.save
-        format.html { redirect_to @chat, notice: 'Chat was successfully created.' }
+        format.html { redirect_to chat_group_chats_path(@chat.chat_group), notice: 'Chat was successfully created.' }
         format.json { render :show, status: :created, location: @chat }
       else
         format.html { render :new }
@@ -70,7 +70,7 @@ class ChatsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def chat_params
-      params.require(:chat).permit(:text).marge(user_id: current_user.id, chat_group_id: params[:chat_group_id])
+      params.require(:chat).permit(:text).merge(user_id: current_user.id, chat_group_id: params[:chat_group_id])
     end
 
     def move_to_index
