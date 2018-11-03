@@ -57,7 +57,7 @@ body {
 .group-edit {
   height: 106px;
   width: 100%;
-  background-color: red;
+  background-color: $white;
   position: fixed;
   z-index: 0;
   border-bottom: 1px solid #eeeeee;
@@ -81,16 +81,16 @@ body {
 }
 
 .chat-space {
-  background-color: green;
+  background-color: $white;
   width: calc(100% - 380px);
   padding: 106px 40px 0 340px;
   z-index: -1;
   &__top-margin {
     height: 6px;
-    background-color: yellow;
+    background-color: $white;
   }
   &__chat {
-    background-color: blue;
+    background-color: $white;
     &__username {
       padding: 40px 0 10px;
       font-size: 16px;
@@ -112,7 +112,7 @@ body {
   }
   &__bottom-margin {
     height: 130px;
-    background-color: black;
+    background-color: $white;
   }
 }
 
