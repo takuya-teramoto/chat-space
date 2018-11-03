@@ -4,8 +4,8 @@
       .side-menu__username-area__username
         = current_user.name
       .side-menu__username-area__fontawesome
-        = fa_icon("edit")
-        = fa_icon("cog")
+        = link_to fa_icon("edit"), new_chat_group_path
+        = link_to fa_icon("cog"), edit_user_registration_path
     - @chat_groups.each do |group|
       = render "groups", group: group
 
@@ -22,111 +22,8 @@
 - unless current_page?(root_path)
   .chat-space
     .chat-space__top-margin
-    .chat-space__chat
-      .chat-space__chat__username
-        username
-      .chat-space__chat__dateandtime
-        dateandtime
-      .chat-space__chat__message
-        message
-    .chat-space__chat
-      .chat-space__chat__username
-        username
-      .chat-space__chat__dateandtime
-        dateandtime
-      .chat-space__chat__message
-        message
-    .chat-space__chat
-      .chat-space__chat__username
-        username
-      .chat-space__chat__dateandtime
-        dateandtime
-      .chat-space__chat__message
-        message
-    .chat-space__chat
-      .chat-space__chat__username
-        username
-      .chat-space__chat__dateandtime
-        dateandtime
-      .chat-space__chat__message
-        message
-    .chat-space__chat
-      .chat-space__chat__username
-        username
-      .chat-space__chat__dateandtime
-        dateandtime
-      .chat-space__chat__message
-        message
-    .chat-space__chat
-      .chat-space__chat__username
-        username
-      .chat-space__chat__dateandtime
-        dateandtime
-      .chat-space__chat__message
-        message
-    .chat-space__chat
-      .chat-space__chat__username
-        username
-      .chat-space__chat__dateandtime
-        dateandtime
-      .chat-space__chat__message
-        message
-    .chat-space__chat
-      .chat-space__chat__username
-        username
-      .chat-space__chat__dateandtime
-        dateandtime
-      .chat-space__chat__message
-        message
-    .chat-space__chat
-      .chat-space__chat__username
-        username
-      .chat-space__chat__dateandtime
-        dateandtime
-      .chat-space__chat__message
-        message
-    .chat-space__chat
-      .chat-space__chat__username
-        username
-      .chat-space__chat__dateandtime
-        dateandtime
-      .chat-space__chat__message
-        message
-    .chat-space__chat
-      .chat-space__chat__username
-        username
-      .chat-space__chat__dateandtime
-        dateandtime
-      .chat-space__chat__message
-        message
-    .chat-space__chat
-      .chat-space__chat__username
-        username
-      .chat-space__chat__dateandtime
-        dateandtime
-      .chat-space__chat__message
-        message
-    .chat-space__chat
-      .chat-space__chat__username
-        username
-      .chat-space__chat__dateandtime
-        dateandtime
-      .chat-space__chat__message
-        message
-    .chat-space__chat
-      .chat-space__chat__username
-        username
-      .chat-space__chat__dateandtime
-        dateandtime
-      .chat-space__chat__message
-        message
-    .chat-space__chat
-      .chat-space__chat__username
-        username
-      .chat-space__chat__dateandtime
-        dateandtime
-      .chat-space__chat__message
-        message
+    - @chats.each do |chat|
+      = render "messages", chat: chat
     .chat-space__bottom-margin
 
 - unless current_page?(root_path)
@@ -136,17 +33,3 @@
         = f.text_area :text, placeholder: "type a message", autofocus: true, required: true
         .bottom-text-area__send-button
           = f.submit "Send", id: "button", class: "send-button"
-/ %p#notice= notice
-/ %h1 Chats
-/ %table
-/   %thead
-/     %tr
-/       %th{:colspan => "3"}
-/   %tbody
-/     - @chats.each do |chat|
-/       %tr
-/         %td= link_to 'Show', chat
-/         %td= link_to 'Edit', edit_chat_path(chat)
-/         %td= link_to 'Destroy', chat, method: :delete, data: { confirm: 'Are you sure?' }
-/ %br/
-/ = link_to 'New Chat', new_chat_path
