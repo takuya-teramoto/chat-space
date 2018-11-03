@@ -1,6 +1,6 @@
 class ChatsController < ApplicationController
   # before_action :set_chat, only: [:show, :edit, :update, :destroy]
-  before_action :move_to_index, except: [:index, :show]
+  before_action :move_to_sign_in
   # before_action :confirm_current_user, only: [:edit, :update, :destroy]
   # GET /chats
   # GET /chats.json
@@ -73,8 +73,8 @@ class ChatsController < ApplicationController
       params.require(:chat).permit(:text).merge(user_id: current_user.id, chat_group_id: params[:chat_group_id])
     end
 
-    def move_to_index
-      redirect_to action: :index unless user_signed_in?
+    def move_to_sign_in
+      redirect_to user_session_path unless user_signed_in?
     end
 
     # def confirm_current_user
