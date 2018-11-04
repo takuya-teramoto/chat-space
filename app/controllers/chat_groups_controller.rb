@@ -1,6 +1,5 @@
 class ChatGroupsController < ApplicationController
 before_action :set_chat_group, only: [:show, :edit, :update, :destroy]
-before_action :move_to_index, except: [:index, :show]
 before_action :confirm_current_user, only: [:edit, :update, :destroy]
 
 
@@ -46,10 +45,6 @@ before_action :confirm_current_user, only: [:edit, :update, :destroy]
 
   def chat_group_params
     params.require(:chat_group).permit(:name)
-  end
-
-  def move_to_index
-    redirect_to root_path unless user_signed_in?
   end
 
   def confirm_current_user
