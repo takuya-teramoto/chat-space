@@ -33,10 +33,10 @@ class ChatsController < ApplicationController
 
     respond_to do |format|
       if @chat.save
-        format.html { redirect_to chat_group_chats_path(@chat.chat_group), notice: 'Chat was successfully created.' }
+        format.html { redirect_to chat_group_chats_path(@chat.chat_group), notice: '投稿しました' }
         format.json { render :show, status: :created, location: @chat }
       else
-        format.html { render :new }
+        format.html { redirect_to chat_group_chats_path(@chat.chat_group), alert: '投稿できませんでした'  }
         format.json { render json: @chat.errors, status: :unprocessable_entity }
       end
     end
