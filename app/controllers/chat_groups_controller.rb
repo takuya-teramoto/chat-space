@@ -13,10 +13,10 @@ before_action :confirm_current_user, only: [:edit, :update, :destroy]
       if @chat_group.save
         @user_chat_group = UserChatGroup.new(user_id: current_user.id, chat_group_id: @chat_group.id)
         @user_chat_group.save
-        format.html { redirect_to chat_group_chats_path(@chat_group), notice: 'chat_group was successfully created.' }
+        format.html { redirect_to chat_group_chats_path(@chat_group), notice: 'グループを作成しました' }
         format.json { render :show, status: :created, location: @chat_group }
       else
-        format.html { render :new }
+        format.html { render :new, alert: 'グループを作成できませんでした' }
         format.json { render json: @chat_group.errors, status: :unprocessable_entity }
       end
     end
@@ -28,10 +28,10 @@ before_action :confirm_current_user, only: [:edit, :update, :destroy]
   def update
     respond_to do |format|
       if @chat_group.update(chat_group_params)
-        format.html { redirect_to chat_group_chats_path(@chat_group), notice: 'Chat_group was successfully updated.' }
+        format.html { redirect_to chat_group_chats_path(@chat_group), notice: 'グループ情報を更新しました' }
         format.json { render :show, status: :ok, location: @chat_group }
       else
-        format.html { render :edit }
+        format.html { render :edit, alert: 'グループ情報を更新できませんでした' }
         format.json { render json: @chat_group.errors, status: :unprocessable_entity }
       end
     end
