@@ -2,11 +2,5 @@
   .side-menu__group__group-name
     = link_to "#{group.name}", chat_group_chats_path(group)
   .side-menu__group__newest-comment
-    - if group.chats.last.present?
-      - if group.chats.last.text.present?
-        = group.chats.last.text
-      - else
-        = "画像が投稿されています"
-    - else
-      = "まだ投稿はありません"
+    newest-comment
 

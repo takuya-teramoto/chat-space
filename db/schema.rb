@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_08_131321) do
+ActiveRecord::Schema.define(version: 2018_10_28_063501) do
 
   create_table "chat_groups", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", default: "", null: false
@@ -24,7 +24,6 @@ ActiveRecord::Schema.define(version: 2018_11_08_131321) do
     t.bigint "chat_group_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "image"
     t.index ["chat_group_id"], name: "index_chats_on_chat_group_id"
     t.index ["user_id"], name: "index_chats_on_user_id"
   end
