@@ -69,7 +69,7 @@ class ChatsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def chat_params
-      params.require(:chat).permit(:text).merge(user_id: current_user.id, chat_group_id: params[:chat_group_id])
+      params.require(:chat).permit(:text, :image).merge(user_id: current_user.id, chat_group_id: params[:chat_group_id])
     end
 
     # def confirm_current_user

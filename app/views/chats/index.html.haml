@@ -31,5 +31,6 @@
     .bottom-text-area
       = form_for [@chat_group, @chat] do |f|
         = f.text_area :text, placeholder: "type a message", autofocus: true, required: true
+        = f.file_field :image
         .bottom-text-area__send-button
           = f.submit "Send", id: "button", class: "send-button"
