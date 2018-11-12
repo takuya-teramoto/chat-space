@@ -1,6 +1,6 @@
 class ChatGroupsController < ApplicationController
-before_action :set_chat_group, only: [:show, :edit, :update, :destroy]
-before_action :confirm_current_user, only: [:edit, :update, :destroy]
+  before_action :set_chat_group, only: [:show, :edit, :update, :destroy]
+  before_action :confirm_current_user, only: [:edit, :update, :destroy]
 
 
   def new
@@ -11,8 +11,6 @@ before_action :confirm_current_user, only: [:edit, :update, :destroy]
     @chat_group = ChatGroup.new(chat_group_params)
     respond_to do |format|
       if @chat_group.save
-        @user_chat_group = UserChatGroup.new(user_id: current_user.id, chat_group_id: @chat_group.id)
-        @user_chat_group.save
         format.html { redirect_to chat_group_chats_path(@chat_group), notice: 'グループを作成しました' }
         format.json { render :show, status: :created, location: @chat_group }
       else
@@ -44,7 +42,8 @@ before_action :confirm_current_user, only: [:edit, :update, :destroy]
   end
 
   def chat_group_params
-    params.require(:chat_group).permit(:name)
+    params[:chat_group][:user_ids][0] = "#{current_user.id}"
+    params.require(:chat_group).permit(:name, user_ids: [])
   end
 
   def confirm_current_user
