@@ -30,11 +30,10 @@ class ChatsController < ApplicationController
   # POST /chats.json
   def create
     @chat = Chat.new(chat_params)
-
     respond_to do |format|
       if @chat.save
-        format.html { redirect_to chat_group_chats_path(@chat.chat_group), notice: '投稿しました' }
-        format.json { render :show, status: :created, location: @chat }
+        # format.html { redirect_to chat_group_chats_path(@chat.chat_group), notice: '投稿しました' }
+        format.json
       else
         format.html { redirect_to chat_group_chats_path(@chat.chat_group), alert: '投稿できませんでした'  }
         format.json { render json: @chat.errors, status: :unprocessable_entity }

@@ -29,8 +29,8 @@
 - unless current_page?(root_path)
   %footer
     .bottom-text-area
-      = form_for [@chat_group, @chat] do |f|
+      = form_for [@chat_group, @chat], html: { id: 'messages' } do |f|
         = f.text_area :text, placeholder: "type a message", autofocus: true, required: true
         = f.file_field :image
-        .bottom-text-area__send-button
-          = f.submit "Send", id: "button", class: "send-button"
+        = f.hidden_field :name, :value => current_user.name
+        = f.submit "Send", class: "send-button"
