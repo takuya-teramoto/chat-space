@@ -22,15 +22,14 @@
 - unless current_page?(root_path)
   .chat-space
     .chat-space__top-margin
-    - @chats.each do |chat|
-      = render "messages", chat: chat
+    .chat-space__messages
+      = render partial: 'messages', locals: { chats: @chats }
     .chat-space__bottom-margin
 
 - unless current_page?(root_path)
   %footer
     .bottom-text-area
-      = form_for [@chat_group, @chat], html: { id: 'messages' } do |f|
+      = form_for [@chat_group, @chat], remote: true do |f|
         = f.text_area :text, placeholder: "type a message", autofocus: true, required: true
         = f.file_field :image
-        = f.hidden_field :name, :value => current_user.name
         = f.submit "Send", class: "send-button"
