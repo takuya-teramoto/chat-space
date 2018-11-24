@@ -9,14 +9,10 @@ class ChatGroupsController < ApplicationController
 
   def create
     @chat_group = ChatGroup.new(chat_group_params)
-    respond_to do |format|
-      if @chat_group.save
-        format.html { redirect_to chat_group_chats_path(@chat_group), notice: 'グループを作成しました' }
-        format.json { render :show, status: :created, location: @chat_group }
-      else
-        format.html { render :new, alert: 'グループを作成できませんでした' }
-        format.json { render json: @chat_group.errors, status: :unprocessable_entity }
-      end
+    if @chat_group.save
+      redirect_to chat_group_chats_path(@chat_group), notice: 'グループを作成しました'
+    else
+      render :new, alert: 'グループを作成できませんでした'
     end
   end
 
@@ -24,14 +20,17 @@ class ChatGroupsController < ApplicationController
   end
 
   def update
+    if @chat_group.update(chat_group_params)
+      redirect_to chat_group_chats_path(@chat_group), notice: 'グループ情報を更新しました'
+    else
+      render :edit, alert: 'グループ情報を更新できませんでした'
+    end
+  end
+
+  def search
+    @users = User.where('name LIKE(?)', "%#{params[:keyword]}%")
     respond_to do |format|
-      if @chat_group.update(chat_group_params)
-        format.html { redirect_to chat_group_chats_path(@chat_group), notice: 'グループ情報を更新しました' }
-        format.json { render :show, status: :ok, location: @chat_group }
-      else
-        format.html { render :edit, alert: 'グループ情報を更新できませんでした' }
-        format.json { render json: @chat_group.errors, status: :unprocessable_entity }
-      end
+      format.json
     end
   end
 
@@ -42,7 +41,6 @@ class ChatGroupsController < ApplicationController
   end
 
   def chat_group_params
-    params[:chat_group][:user_ids][0] = "#{current_user.id}"
     params.require(:chat_group).permit(:name, user_ids: [])
   end
 
