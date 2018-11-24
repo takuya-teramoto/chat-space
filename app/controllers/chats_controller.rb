@@ -9,7 +9,7 @@ class ChatsController < ApplicationController
       @chat_group = ChatGroup.find(params[:chat_group_id])
       @chats = @chat_group.chats.order(id: "DESC")
     end
-    @chat_groups = ChatGroup.all
+    @chat_groups = ChatGroup.all.includes(:chats, :users)
   end
 
   # GET /chats/1
@@ -30,15 +30,11 @@ class ChatsController < ApplicationController
   # POST /chats.json
   def create
     @chat = Chat.new(chat_params)
-
-    respond_to do |format|
-      if @chat.save
-        format.html { redirect_to chat_group_chats_path(@chat.chat_group), notice: '投稿しました' }
-        format.json { render :show, status: :created, location: @chat }
-      else
-        format.html { redirect_to chat_group_chats_path(@chat.chat_group), alert: '投稿できませんでした'  }
-        format.json { render json: @chat.errors, status: :unprocessable_entity }
-      end
+    @chats = Chat.all.order(id: "DESC").includes(:user)
+    if @chat.save
+      render :create
+    else
+      redirect_to chat_group_chats_path(@chat.chat_group), alert: '投稿できませんでした'
     end
   end
 

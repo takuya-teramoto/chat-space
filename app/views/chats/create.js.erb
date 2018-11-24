@@ -1,0 +1,2 @@
+$("textarea").val('');
+$(".chat-space__messages").html("<%= j(render partial: 'messages', locals: { chats: @chats })%>");
