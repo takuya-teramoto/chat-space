@@ -4,12 +4,12 @@ class ChatsController < ApplicationController
   # GET /chats
   # GET /chats.json
   def index
-    if params[:chat_group_id] #rootは除外する
+    if params[:chat_group_id]
       @chat = Chat.new
       @chat_group = ChatGroup.find(params[:chat_group_id])
-      @chats = @chat_group.chats.order(id: "DESC")
+      @chats = @chat_group.chats.order(id: "DESC").includes(:user)
     end
-    @chat_groups = ChatGroup.all.includes(:chats, :users)
+    @chat_groups = ChatGroup.all.order(id: "DESC").includes(:chats)
   end
 
   # GET /chats/1
