@@ -22,10 +22,9 @@ $(function() {
 
   $(".chat-group-form__input").on("keyup", function() {
     var input = $("#user-search-field.chat-group-form__input").val();
-    console.log(input);
     $.ajax({
       type: 'GET',
-      url: "/chat_groups/search",
+      url: "/chat_groups",
       data: { keyword: input },
       dataType: 'json'
     })
@@ -34,7 +33,6 @@ $(function() {
       if (input !== "") {
         if (users.length !== 0) {
           users.forEach(function(user){
-            console.log(user.id);
             appendUser(user);
           });
         }
@@ -47,7 +45,6 @@ $(function() {
 
   $(document).on("click", "#user-search-result > div > a", function () {
     $(this).parent().remove();
-    console.log($(this).attr("data-user-id"));
     var user_id = $(this).attr("data-user-id");
     var user_name = $(this).attr("data-user-name");
     appendMenber(user_id, user_name);

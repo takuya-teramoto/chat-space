@@ -27,7 +27,7 @@ class ChatGroupsController < ApplicationController
     end
   end
 
-  def search
+  def index
     @users = User.where('name LIKE(?)', "%#{params[:keyword]}%")
     respond_to do |format|
       format.json
@@ -35,7 +35,6 @@ class ChatGroupsController < ApplicationController
   end
 
   private
-  # Use callbacks to share common setup or constraints between actions.
   def set_chat_group
     @chat_group = ChatGroup.find(params[:id])
   end
