@@ -21,7 +21,6 @@ $(function() {
     var chat_id = $(".chat-space__chat").attr("id").replace("chat_", "");
     var chat_group_id = $(".group-edit").attr("id").replace("chat_group_", "");
     var url = "/chat_groups/" + chat_group_id + "/chats";
-    console.log(url);
     $.ajax({
       type: 'GET',
       url: url,
@@ -29,10 +28,8 @@ $(function() {
       dataType: 'json'
     })
     .done(function(chats) {
-      console.log(chats);
       if (chats.length !== 0) {
         chats.forEach(function(chat){
-          console.log(chat.image_tag.url);
           appendChat(chat);
         });
       }
