@@ -10,7 +10,7 @@
       = render "groups", group: group
 
   - unless current_page?(root_path)
-    .group-edit
+    .group-edit[@chat_group]
       .group-edit__edit-button
         = link_to "edit", edit_chat_group_path(@chat_group)
       .group-edit__selected-group-name
@@ -22,8 +22,10 @@
 - unless current_page?(root_path)
   .chat-space
     .chat-space__top-margin
+    #additional
     .chat-space__messages
-      = render partial: 'messages', locals: { chats: @chats }
+      - @chats.each do |chat|
+        = render partial: 'messages', locals: { chat: chat }
     .chat-space__bottom-margin
 
 - unless current_page?(root_path)
