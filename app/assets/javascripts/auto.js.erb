@@ -1,0 +1,43 @@
+$(function() {
+
+  var chats = $("#additional")
+
+  function appendChat(chat) {
+    var html = `<div class="chat-space__chat" id="chat_${chat.id}">
+                  <div class="chat-space__chat__username">
+                    ${chat.user_name}
+                  </div>
+                  <div class="chat-space__chat__dateandtime">
+                    ${chat.updated_at}
+                  </div>
+                  <div class="chat-space__chat__message">
+                    ${chat.text}
+                    <image src="${chat.image_tag.url}" width="100" height="100">
+                  </div>
+                </div>`
+    chats.prepend(html);
+  }
+  function update(){
+    var chat_id = $(".chat-space__chat").attr("id").replace("chat_", "");
+    var chat_group_id = $(".group-edit").attr("id").replace("chat_group_", "");
+    var url = "/chat_groups/" + chat_group_id + "/chats";
+    $.ajax({
+      type: 'GET',
+      url: url,
+      data: { chat_id: chat_id, chat_group_id: chat_group_id },
+      dataType: 'json'
+    })
+    .done(function(chats) {
+      if (chats.length !== 0) {
+        chats.forEach(function(chat){
+          appendChat(chat);
+        });
+      }
+    })
+  }
+
+  $(function(){
+    setInterval(update, 10000);
+  });
+
+});

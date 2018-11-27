@@ -44,16 +44,7 @@ class ChatGroupsController < ApplicationController
   end
 
   def confirm_current_user
-    redirect_to chat_group_chats_path(@chat_group) unless authenticate_user?(@chat_group)
+    redirect_to chat_group_chats_path(@chat_group) unless @chat_group.user_ids.include?(current_user.id)
   end
 
-  def authenticate_user?(chat_group)
-    judge = false
-    chat_group.user_ids.each do |id|
-      if id == current_user.id
-        judge =  true
-      end
-    end
-    return judge
-  end
 end
