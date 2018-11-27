@@ -1,2 +1,5 @@
+var html = `<% @chats.each do |chat| %>
+              <%= render partial: 'messages', locals: { chat: chat } %>
+            <% end %>`
 $("textarea").val('');
-$(".chat-space__messages").html("<%= j(render partial: 'messages', locals: { chats: @chats })%>");
+$(".chat-space__messages").html(html);
