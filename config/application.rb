@@ -10,7 +10,7 @@ module ChatSpace
   class Application < Rails::Application
     config.i18n.default_locale = :ja #devise error messasis in japanese version
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 5.2
+    config.load_defaults 5.1
 
     config.generators do |g|
       g.stylesheets false
